@@ -1,6 +1,6 @@
 # gole-boot
 
-gole-boot 框架是从Java向golang转型的过程中总结的一套至简化的工具框架，借鉴spring-boot的思想，遵从大道至简原则，让开发者在开发go的项目方面使用更简单
+gole-boot 框架是从Java向golang转型的过程中总结的一套至简化的工具框架，借鉴spring-boot的思想，遵从大道至简原则，脱胎与gole项目，旨在将三方框架集成放到这里
 
 ## 下载
 ```shell
