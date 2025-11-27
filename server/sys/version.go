@@ -7,7 +7,7 @@ import (
 	"github.com/simonalong/gole/config"
 )
 
-var BootVersion = "v1.6.2"
+var BootVersion = "v1.0.0"
 
 var loadLock sync.Mutex
 var Loaded = false
@@ -27,7 +27,7 @@ func PrintBanner() {
 	if config.GetValueBoolDefault("gole.application.banner", true) {
 		fmt.Printf("%s", Banner)
 	}
-	fmt.Printf("---------------------------------------- cbb-gole-boot: %s ----------------------------------------\n", BootVersion)
+	fmt.Printf("---------------------------------------- gole-boot: %s ----------------------------------------\n", BootVersion)
 	fmt.Printf("profile：%s\n", config.CurrentProfile)
 	appName := config.GoleCfg.Application.Name
 	if appName != "" {
