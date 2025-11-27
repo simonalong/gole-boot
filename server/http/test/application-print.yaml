@@ -1,0 +1,6 @@
+gole:
+  server:
+    http:
+      enable: true
+
+

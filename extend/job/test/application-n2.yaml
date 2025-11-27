@@ -1,0 +1,23 @@
+gole:
+  application:
+    name: cbb-base-job-demo
+    version: 1.0.0
+  server:
+    http:
+      enable: true
+      port: 8182
+  # 分布式定时任务的客户端配置：开启这个需要先开启 gole.server.http.enable=true；因为cbb-job的这个客户端需要http来提供端口服务
+  job:
+    # 是否启用，默认：false
+    enable: true
+    # 分布式任务服务地址，默认：http://cbb-mid-srv-job:18080
+    server-address: http://localhost:18080
+    # 执行器名称，默认：${gole.application.name}
+    executor-name: cbb-base-job-demo
+    # 执行器所在的业务服务名和端口，默认：http://${gole.application.name}:${gole.server.http.port}
+    executor-address: http://localhost:8182
+  logger:
+    level: debug
+    color:
+      # 启用：true/false，默认：true
+      enable: true

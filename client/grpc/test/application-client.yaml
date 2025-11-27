@@ -1,0 +1,11 @@
+gole:
+  grpc:
+    enable: true
+    demo1:
+      host: localhost
+      port: 9092
+      # WithConnectParams将ClientConn配置为使用提供的ConnectParams来创建和维护与服务器的连接。
+      connect-params:
+        # MinConnectTimeout是我们愿意提供连接完成的最短时间。
+        min-connect-timeout: 10s
+

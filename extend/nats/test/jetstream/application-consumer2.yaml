@@ -1,0 +1,32 @@
+gole:
+  nats:
+    enable: true
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+    url: nats://127.0.0.1:4222
+    # 客户端名字，可以不填，默认为 gole.application.name
+    name: xx-demo-service
+    # 认证方式：用户名和密码
+    username: admin
+    # 认证方式：密码，这个密码一定要用明文（服务端加密的话，代码中要用明文）
+    password: admin-demo123@xxxx.com
+    # nats-js的配置
+    jetstream:
+      # 是否使用jetstream
+      enable: true
+      # 流配置
+      streams:
+        - name: stream-name1
+          # Subjects 是流正在监听的主题列表。支持通配符。如果流是作为镜像创建的，则无法设置主题。
+          subjects:
+            - test.*.req
+      # 消费者配置
+      consumers:
+        # Name是消费者的可选名称。如果未设置，则会自动生成一个。
+        - name: consumer2
+          durable: consumer2
+          # 确认策略：定义了消费者的确认策略。默认为0：AckExplicitPolicy
+          #	0：AckExplicitPolicy：要求所有消息都使用ack或nack
+          #	1：AckAllPolicy：在标记序列号时，也会隐式地标记低于此序列号的所有序列
+          #	2：AckNonePolicy：不要求对已传递的消息进行确认
+#          ack-policy: 0
+#          deliver-policy: 5

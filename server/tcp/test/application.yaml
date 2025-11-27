@@ -1,0 +1,7 @@
+gole:
+  server:
+    tcp:
+      enable: true
+      port: 9000
+      # 连接激活判断的时长：支持ns、us、ms、s、m、h
+      active-judge-duration: 12h

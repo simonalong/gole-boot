@@ -1,0 +1,17 @@
+gole:
+  tdengine:
+    enable: true
+    demo1:
+      connect-type: websocket
+      host: localhost
+      username: root
+      password: taosdata
+      db-name: td_orm1
+      port: 6041
+    demo2:
+      connect-type: websocket
+      host: localhost
+      username: root
+      password: taosdata
+      db-name: td_orm2
+      port: 6041

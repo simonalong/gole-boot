@@ -1,0 +1,9 @@
+gole:
+  nats:
+    enable: true
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+    url: nats://127.0.0.1:4222
+    # 客户端名字，可以不填，默认为 gole.application.name
+    name: xx-demo-service
+    # nk的种子文件，示例：./nkeys/seed.txt
+    nk-seed-file: ./nkeys/seed.txt

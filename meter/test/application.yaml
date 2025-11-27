@@ -1,0 +1,9 @@
+gole:
+  application:
+    name: demo
+  server:
+    enable: true
+    port: 8180
+    gin:
+      mode: debug
+

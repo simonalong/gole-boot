@@ -1,0 +1,12 @@
+gole:
+  server:
+    tcp:
+      enable: true
+      port: 9000
+  opentelemetry:
+    # opentelemetry（埋点和指标采集）：默认关闭
+    enable: true
+    # opentelemetry-collector服务的grpc地址；示例：localhost:4137
+    exporter-url: localhost:4317
+    # 服务名，默认为 gole.application.name
+    service-name: demo-tcp-service

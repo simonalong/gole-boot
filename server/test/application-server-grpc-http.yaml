@@ -1,0 +1,18 @@
+gole:
+  application:
+    name: sample
+  server:
+    # http服务
+    http:
+      enable: true
+      # http端口号
+      port: 8080
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug
+    # grpc 服务
+    grpc:
+      enable: true
+      # grpc端口号
+      port: 9090
+

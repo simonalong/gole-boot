@@ -1,0 +1,16 @@
+gole:
+  application:
+    name: sample
+  server:
+    # http服务
+    http:
+      enable: true
+      # http端口号
+      port: 8180
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug
+    # tcp服务
+    tcp:
+      enable: true
+      port: 9001

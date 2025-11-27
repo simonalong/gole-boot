@@ -1,0 +1,7 @@
+gole:
+  server:
+    http:
+      enable: true
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug

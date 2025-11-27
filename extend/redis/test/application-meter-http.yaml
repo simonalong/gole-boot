@@ -1,0 +1,14 @@
+gole:
+  redis:
+    enable: true
+    standalone:
+      addr: localhost:6379
+  application:
+    name: redis-demo
+  server:
+    http:
+      enable: true
+      port: 8180
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug

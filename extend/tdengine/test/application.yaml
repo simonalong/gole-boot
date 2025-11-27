@@ -1,0 +1,18 @@
+gole:
+  application:
+    name: aiot-srv-task-manager
+    version: 1.0.0
+  tdengine:
+    enable: true
+    # 连接类型，支持三种：original, rest, websocket；默认为original（v1.1.0暂时只支持original）
+    connect-type: websocket
+    host: 192.168.1.83
+    user-name: root
+    password: taosdata
+    # aiot日志库
+    db-name: aiot_log_dev
+    port: 6041
+  logger:
+    level: debug
+    color:
+      enable: true

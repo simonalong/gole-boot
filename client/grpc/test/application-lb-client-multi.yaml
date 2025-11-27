@@ -1,0 +1,16 @@
+gole:
+  grpc:
+    enable: true
+    demo1-client: # 连接服务1
+      service-name: demo1-service
+      connect-params:
+        min-connect-timeout: 10s
+    demo2-client: # 连接服务2
+      service-name: demo2-service
+      connect-params:
+        min-connect-timeout: 10s
+    register:
+      enable: true
+      url: nats://127.0.0.1:4222
+      userName: admin
+      password: admin-demo123@xxxx.com

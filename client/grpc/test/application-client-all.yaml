@@ -1,0 +1,75 @@
+gole:
+  grpc:
+    enable: true
+    demo1:
+      host: localhost
+      port: 9090
+      # WithAuthority返回一个DialOption，指定用作：authority伪标头和身份验证握手中的服务器名称的值。
+      authority: test
+      # WithDisableServiceConfig返回一个DialOption，该选项使gRPC忽略解析器提供的任何服务配置，并向解析器提供不获取服务配置的提示。
+      # 请注意，此拨号选项仅禁用解析器的服务配置。如果提供了默认服务配置，gRPC将使用默认服务配置。
+      disable-service-config: true
+      # WithDisableRetry返回一个禁用重试的DialOption，即使服务配置启用了重试。这不会影响透明重试，如果没有数据写入线路或远程服务器未处理RPC，透明重试将自动发生。
+      disable-retry: true
+      # WithDisableHealthCheck禁用此ClientConn的所有子Conn的LB通道健康检查。
+      # 注意：此API是实验性的，可能会在以后的版本中更改或删除。
+      disable-health-check: true
+      # WithDefaultServiceConfig返回一个DialOption，用于配置默认服务配置，该配置将在以下情况下使用：
+      # 1.还使用WithDisableServiceConfig，或
+      # 2.名称解析器不提供服务配置或提供无效的服务配置。
+      # 参数s是默认服务配置的JSON表示形式。有关服务配置的更多信息，请参阅：https://github.com/grpc/grpc/blob/master/doc/service_config.md有关使用的简单示例，请参阅：examples/features/load_balancing/client/main.go
+      default-service-config-raw-jSON: json
+      # WithIdleTimeout返回一个DialOption，用于配置通道的空闲超时。如果通道在配置的超时时间内处于空闲状态，即没有正在进行的RPC，也没有启动新的RPC，则通道将进入空闲模式，因此名称解析器和负载均衡器将关闭。当调用Connect（）方法或启动RPC时，通道将退出空闲模式。
+      # 如果在拨号时未设置此拨号选项，则将使用默认超时30分钟，并且可以通过传递超时0来禁用空闲状态。
+      # 注意：此API是实验性的，可能会在以后的版本中更改或删除。
+      idle-timeout: 30m
+      # WithConnectParams将ClientConn配置为使用提供的ConnectParams来创建和维护与服务器的连接。
+      connect-params:
+        # MinConnectTimeout是我们愿意提供连接完成的最短时间。
+        min-connect-timeout: 10s
+        # 退避指定连接退避的配置选项。
+        backoff:
+          # BaseDelay是第一次故障后回退的时间量。
+          base-delay: 10s
+          # 乘数是重试失败后用于乘以回退的因子。理想情况下应大于1。
+          multiplier: 10
+          # 抖动是回退随机化的因素。
+          jitter: 10.0
+          # MaxDelay是退避延迟的上限。
+          max-delay: 10s
+    demo2:
+      host: localhost
+      port: 9091
+      # WithAuthority返回一个DialOption，指定用作：authority伪标头和身份验证握手中的服务器名称的值。
+      authority: test
+      # WithDisableServiceConfig返回一个DialOption，该选项使gRPC忽略解析器提供的任何服务配置，并向解析器提供不获取服务配置的提示。
+      # 请注意，此拨号选项仅禁用解析器的服务配置。如果提供了默认服务配置，gRPC将使用默认服务配置。
+      disable-service-config: true
+      # WithDisableRetry返回一个禁用重试的DialOption，即使服务配置启用了重试。这不会影响透明重试，如果没有数据写入线路或远程服务器未处理RPC，透明重试将自动发生。
+      disable-retry: true
+      # WithDisableHealthCheck禁用此ClientConn的所有子Conn的LB通道健康检查。
+      # 注意：此API是实验性的，可能会在以后的版本中更改或删除。
+      disable-health-check: true
+      # WithDefaultServiceConfig返回一个DialOption，用于配置默认服务配置，该配置将在以下情况下使用：
+      # 1.还使用WithDisableServiceConfig，或
+      # 2.名称解析器不提供服务配置或提供无效的服务配置。
+      # 参数s是默认服务配置的JSON表示形式。有关服务配置的更多信息，请参阅：https://github.com/grpc/grpc/blob/master/doc/service_config.md有关使用的简单示例，请参阅：examples/features/load_balancing/client/main.go
+      default-service-config-raw-jSON: json
+      # WithIdleTimeout返回一个DialOption，用于配置通道的空闲超时。如果通道在配置的超时时间内处于空闲状态，即没有正在进行的RPC，也没有启动新的RPC，则通道将进入空闲模式，因此名称解析器和负载均衡器将关闭。当调用Connect（）方法或启动RPC时，通道将退出空闲模式。
+      # 如果在拨号时未设置此拨号选项，则将使用默认超时30分钟，并且可以通过传递超时0来禁用空闲状态。
+      # 注意：此API是实验性的，可能会在以后的版本中更改或删除。
+      idle-timeout: 30m
+      # WithConnectParams将ClientConn配置为使用提供的ConnectParams来创建和维护与服务器的连接。
+      connect-params:
+        # MinConnectTimeout是我们愿意提供连接完成的最短时间。
+        min-connect-timeout: 10s
+        # 退避指定连接退避的配置选项。
+        backoff:
+          # BaseDelay是第一次故障后回退的时间量。
+          base-delay: 10s
+          # 乘数是重试失败后用于乘以回退的因子。理想情况下应大于1。
+          multiplier: 10
+          # 抖动是回退随机化的因素。
+          jitter: 10.0
+          # MaxDelay是退避延迟的上限。
+          max-delay: 10s

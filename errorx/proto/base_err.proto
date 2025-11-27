@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "proto/errorx";
+
+package errorx;
+
+message GrpcBaseError {
+  string code = 1;
+  string msg = 2;
+  string detail = 3;
+}

@@ -1,0 +1,20 @@
+gole:
+  rabbitmq:
+    enable: true
+    user: admin
+    password: 123456
+    host: 192.168.1.75
+    port: 5672
+    # 默认空
+    vhost: baseBoot
+    # 多个队列
+    queues:
+      - name: rpc_req_queue
+    # 多个消费者
+    consumers:
+      - name: c2
+        # 消费者绑定的队列名
+        queue: rpc_req_queue
+    # 多个生产者
+    producers:
+      - name: c2_p

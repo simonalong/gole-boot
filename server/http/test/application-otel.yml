@@ -1,0 +1,36 @@
+gole:
+  application:
+    # 应用名称
+    name: sample
+  server:
+    http:
+      # 是否启用，默认：true
+      enable: true
+      # 端口号
+      port: 8082
+      # web框架gin的配置
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug
+      exception:
+        # 异常返回打印
+        print:
+          # 是否启用：true, false；默认 true
+          enable: true
+          # 一些异常httpStatus不打印；默认可不填
+          except:
+            - 408
+            - 409
+  logger:
+    level: debug
+    color:
+      # 启用：true/false，默认：true
+      enable: true
+  opentelemetry:
+    # opentelemetry（埋点和指标采集）：默认关闭
+    enable: true
+    # opentelemetry-collector服务的地址；支持grpc和http上报，grpc示例：localhost:4317；http示例：http://localhost:4318
+    exporter-url: localhost:4317
+#    exporter-url: http://localhost:4318
+    # 服务名，默认为 gole.application.name
+    service-name: demo-service

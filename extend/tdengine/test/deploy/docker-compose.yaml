@@ -1,0 +1,15 @@
+services:
+  tdengine-service:
+    container_name: tdengine-service
+    image: tdengine:3.2.3.0
+    environment:
+      TZ: "Asia/Shanghai"
+    ports:
+      - 6160:6060
+      - 6030:6030
+      - 6041:6041
+      - 6043-6060:6043-6060
+      - 6043-6060:6043-6060/udp
+    volumes:
+      - ./data:/var/lib/taos
+      - ./log:/var/log/taos

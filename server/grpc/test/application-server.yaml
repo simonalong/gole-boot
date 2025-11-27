@@ -1,0 +1,5 @@
+gole:
+  server:
+    grpc:
+      enable: true
+      port: 9090

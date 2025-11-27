@@ -1,0 +1,103 @@
+gole:
+  nats:
+    enable: true
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+    url: nats://127.0.0.1:4222
+    # 客户端名字
+    name: xx-demo-service
+    # 认证方式：用户名和密码
+    username: admin
+    # 认证方式：密码，这个密码一定要用明文（服务端加密的话，代码中要用明文）
+    password: admin-demo123@xxxx.com
+    # nats-js的配置
+    jetstream:
+      # 是否使用jetstream
+      enable: true
+      # 流配置
+      streams:
+        - name: stream-name1
+          subjects:
+            - test1.*.req
+      # 消费者配置
+      consumers:
+          # --------------- 基本配置 ---------------
+          # Name是消费者的可选名称。如果未设置，则会自动生成一个。
+        - name: consumer1
+          # Durable是消费者可选的持久名称。如果同时设置了Durable和Name，则它们必须相等。除非设置了InactiveThreshold，否则不会自动清理耐用消费品。
+          durable: consumer1
+          # 描述
+          description: 消费者描述
+          # 创建有序消费者
+          order: true
+          # --------------- 投递配置 ---------------
+          # 消息投递策略：DeliverPolicy定义了从哪个点开始从流中传递消息。默认为0：DeliverAllPolicy
+          #	0：DeliverAllPolicy：从流的一开始就开始传递消息。默认设置
+          #	1：DeliverLastPolicy：将使用收到的最后一个序列启动消费者。
+          #	2：DeliverNewPolicy：只会传递在创建消费者后发送的新消息。
+          #	3：DeliverByStartSequencePolicy：将从ConsumerConfig中配置了OptStartSeq的给定序列开始传递消息。
+          #	4：DeliverByStartTimePolicy：将从ConsumerConfig中配置了OptStartTime的给定时间开始传递消息
+          #	5：DeliverLastPerSubjectPolicy：将向消费者发送收到的所有主题的最后一条消息。
+          deliver-policy: 3
+          # 可选的序列号，用于开始消息传递。仅当DeliverPolicy设置为DeliverByStartSequencePolicy时适用
+          opt-start-seq: 12
+          # 开始消息传递的可选时间。仅当DeliverPolicy设置为DeliverByStartTimePolicy时适用
+          opt-start-time: 2024-07-30
+          #	BackOff指定了在确认失败后重试消息传递的可选回退间隔。它覆盖了AckWait。
+          #	BackOff仅适用于未在指定时间内确认的消息，不适用于未确认的消息。
+          #	指定的间隔数必须小于或等于MaxDeliver。如果间隔数较低，则最后一个间隔将用于所有剩余的尝试。
+          back-off:
+            - 3s
+          #	过滤主题：FilterSubject可用于过滤从流中传递的消息。FilterSubject是FilterSubjects独有的。
+          filter-subject: test.req
+          #	ReplayPolicy定义了向消费者发送消息的速率。
+          #	如果设置了ReplayOriginalPolicy，则消息将以与存储在流中的时间间隔相同的时间间隔发送。
+          #	例如，这可用于模拟开发环境中的生产流量。如果设置了ReplayInstantPolicy，则会尽快发送消息。默认为，0：ReplayInstantPolicy
+          #	0：ReplayInstantPolicy：将尽可能快地重放消息。
+          #	1：ReplayOriginalPolicy：将保持与收到消息相同的时间。
+          replay-policy: 1
+
+          #	--------------- 确认配置 ---------------
+          # 确认策略：定义了消费者的确认策略。默认为0：AckExplicitPolicy
+          #	0：AckExplicitPolicy：要求所有消息都使用ack或nack
+          #	1：AckAllPolicy：在标记序列号时，也会隐式地标记低于此序列号的所有序列
+          #	2：AckNonePolicy：不要求对已传递的消息进行确认
+          ack-policy: 2
+          #	// AckWait定义了服务器在重新发送消息之前等待确认的时间。如果未设置，服务器默认值为30秒。
+          ack-wait: 5m
+
+          #--------------- 投递限制 ---------------
+          # RateLimit指定了可选的最大消息传递速率，单位为比特每秒。
+          rate-limit: 1000
+          #	SampleFrequency是一个可选频率，用于对确认的可观察性采样频率进行采样。
+          sample-frequency: 10s
+          # MaxDeliver定义了邮件的最大投递尝试次数。适用于因ack策略而重新发送的任何邮件。如果未设置，服务器默认值为-1（无限制）
+          max-deliver: 1000
+          # MaxWaiting是等待完成的拉取请求的最大数量。如果未设置，这将继承流的ConsumerLimits的设置，或者（如果未设置）继承帐户设置的设置。如果两者都没有设置，则服务器默认值为512。
+          max-waiting: 1000
+          # MaxAckPending是未确认邮件的最大数量。一旦达到此限制，服务器将暂停向消费者发送消息。如果未设置，服务器默认值为1000。设置为-1表示无限制
+          max-ack-pending: 1000
+          # MaxRequestBatch是单个拉取请求可以进行的可选最大批处理大小。当使用MaxRequestMaxBytes设置时，批处理大小将受到首先达到的限制的约束。
+          max-request-batch: 1000
+          # MaxRequestExpires是单个拉取请求等待消息可用于拉取的最长持续时间。
+          max-request-expires: 10s
+          #	MaxRequestMaxBytes是给定批中可以请求的可选最大总字节数。当使用MaxRequestBatch设置时，批大小将受到首先达到的限制的约束。
+          max-request-max-bytes: 1000
+          # HeadersOnly指示是否只应发送消息的标头（而不发送有效载荷）。默认为false。
+          headers-only: true
+
+          # --------------- 其他配置 ---------------
+          # InactiveThreshold是一个持续时间，如果消费者在指定的持续时间内处于非活动状态，则指示服务器清理消费者。
+          # 默认情况下，持久消费者不会被清理，但如果设置了InactiveThreshold，则会被清理。如果没有设置，则会继承流的ConsumerLimits的设置。如果两者都没有设置，服务器默认值为5秒。
+          # 如果服务器没有收到拉取请求（对于拉取消费者），或者没有检测到对传递主题的兴趣（对于推送消费者），则消费者被视为不活跃，如果没有要传递的消息则不是这样。
+          inactive-threshold: 10s
+          # Replicas消费者状态的副本数量。默认情况下，消费者从流中继承副本的数量。
+          replicas: 3
+          # MemoryStorage是一个标志，用于强制消费者使用内存存储，而不是从流中继承存储类型。
+          memory-storage: true
+          # FilterSubjects允许按主题过滤流中的消息。此字段仅适用于FilterSubject。需要nats服务器v2.10.0或更高版本。
+          filter-subjects:
+            - test.req
+          # 元数据是一组应用程序定义的键值对，用于关联消费者的元数据。此功能需要nats服务器v2.10.0或更高版本。
+          metadata:
+            key1: value1
+            key2: value2

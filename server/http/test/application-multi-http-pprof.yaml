@@ -1,0 +1,35 @@
+gole:
+  application:
+    name: sample
+    version: 1.0.0
+  server:
+    http:
+      gin:
+        # 有三种模式：debug/release/test，默认 release
+        mode: release
+      # multi 这个表示多个服务端配置
+      multi:
+        # 这个服务端1的名字
+        server-name1:
+          enable: true
+          port: 8181
+          pprof:
+            enable: true
+        # 这个服务端2的名字
+        server-name2:
+          enable: true
+          port: 8182
+          pprof:
+            enable: true
+        # 这个服务端3的名字
+        server-name3:
+          enable: true
+          port: 8183
+          pprof:
+            enable: true
+  logger:
+    level: debug
+    color:
+      enable: true
+  debug:
+    enable: true

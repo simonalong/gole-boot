@@ -1,0 +1,42 @@
+gole:
+  server:
+    tcp:
+      enable: true
+      port: 9000
+      # 连接激活判断的时长：支持ns、us、ms、s、m、h
+      active-judge-duration: 12h
+      gnet:
+        # 多核表示是否将使用多核有效地创建引擎，如果是这样，则必须注意在所有事件回调之间同步内存，否则，它将使用单线程运行引擎。引擎中的线程数将自动分配给当前进程可以利用的可用逻辑CPU的数量。
+        multicore: false
+        # NumEventLoop被设置为启动给定数量的事件循环goroutines。请注意，非负的NumEventLoop将覆盖 参数：multicore
+        num-event-loop: 3
+        # LB表示在向事件循环分配新连接时使用的负载平衡算法。负载均衡：round-robin，least-connections，source-addr-hash
+        lb: round-robin
+        # ReuseAddr指示是否设置SO_ReuseAddr套接字选项。
+        reuse-addr: true
+        # ReusePort指示是否设置SO_ReusePort套接字选项。
+        reuse-port: true
+        # MulticastInterfaceIndex是多播UDP地址将绑定到的接口名称的索引。
+        multicast-interface-index: 4
+        # ============================= 服务器端和客户端的选项 =============================
+        # ReadBufferCap是可读事件发生时可以从远程读取的最大字节数。默认值为64KB，可以减小该值以避免后续连接不足，也可以增大该值以从套接字读取更多数据。
+        # 请注意，ReadBufferCap将始终转换为大于或等于其实际数量的两个整数值的最小幂。
+        read-buffer-cap: 12
+        # WriteBufferCap是静态出站缓冲区可以容纳的最大字节数，如果数据超过此值，溢出字节将存储在弹性链表缓冲区中。默认值为64KB。
+        # 请注意，WriteBufferCap将始终转换为大于或等于其实际数量的两个整数值的最小幂。
+        write-buffer-cap: 12
+        # LockOSThread用于确定每个I/O事件循环是否应与操作系统线程相关联，当您需要某种机制（如线程本地存储），或调用某些需要通过cgo进行线程级操作的C库（如图形库：GLib），或希望所有I/O事件循环实际并行运行以获得潜在的更高性能时，它非常有用。
+        lock-os-thread: true
+        # Ticker表示是否已设置自动收报机。
+        ticker: true
+        # TCPKeepAlive启用TCP保活机制（SO_KEEPALIVE），并在TCP_KEEPIDLE上设置其值，在TCP_KEEPINTVL上设置其数值的1/5，在TCP_6KEEPCNT上设置5。
+        tcp-keep-alive: 30s
+        # TCPNoDelay控制操作系统是否应该延迟数据包传输，以期发送更少的数据包（Nagle算法）。当此选项分配给TCPNoDelay时，TCP_NODELAY套接字选项将打开，相反，如果分配给TCPDelay，套接字选项将关闭。
+        # 默认值为TCPNoDelay，这意味着TCP_NODELAY已打开，数据将不会被缓冲，而是在写入操作后尽快发送。0-nodelay;1-delay
+        tcp-no-delay: 0
+        # 设置内核的最大套接字接收缓冲区（以字节为单位）。
+        socket-receive-buffer: 1024
+        # SocketSendBuffer设置内核的最大套接字发送缓冲区（以字节为单位）。
+        socket-send-buffer: 1024
+        # EdgeTriggeredIO为底层epoll/kqueue事件循环启用边缘触发I/O。除非你100%确定自己在做什么，否则不要启用它。请注意，此选项仅适用于面向流的协议。
+        edge-triggered-io: true

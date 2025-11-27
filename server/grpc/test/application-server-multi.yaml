@@ -1,0 +1,12 @@
+gole:
+  server:
+    grpc:
+      multi:
+        demo1-service:
+          enable: true
+          port: 9091
+          service-name: demo1-service
+        demo2-service:
+          enable: true
+          port: 9092
+          service-name: demo2-service

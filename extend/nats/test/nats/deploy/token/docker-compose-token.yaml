@@ -1,0 +1,11 @@
+services:
+  nats-token-server:
+    container_name: nats-token-server
+    image: nats:2.10.16
+    entrypoint: /nats-server
+#    command: "--config /config/nats-light.conf"
+    command: "--config /config/nats-dark.conf"
+    ports:
+      - 4222:4222
+    volumes:
+      - ./config:/config

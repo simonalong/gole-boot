@@ -1,0 +1,12 @@
+gole:
+  datasource:
+    # 是否启用，默认关闭
+    enable: true
+    username: root
+    password: root@123
+    host: 192.168.1.83
+    port: 3306
+    driver-name: mysql
+    # 数据库名
+    db-name: cbb
+

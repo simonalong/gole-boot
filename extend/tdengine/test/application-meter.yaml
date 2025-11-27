@@ -1,0 +1,17 @@
+gole:
+  tdengine:
+    enable: true
+    # 连接类型，支持三种：original, restful, websocket；默认为original（v1.1.0暂时只支持original）
+    connect-type: original
+    host: localhost
+    username: root
+    password: taosdata
+    db-name: td_orm
+    port: 6030
+  server:
+    http:
+      enable: true
+      port: 8180
+      gin:
+        # 有三种模式：debug/release/test
+        mode: debug

@@ -1,0 +1,8 @@
+gole:
+  application:
+    name: cbb-base-job-demo
+    version: 1.0.0
+  redis:
+    enable: true
+    standalone:
+      addr: localhost:6379

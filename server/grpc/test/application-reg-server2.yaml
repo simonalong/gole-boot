@@ -1,0 +1,17 @@
+gole:
+  server:
+    grpc:
+      enable: true
+      port: 9092
+      # 在注册中心注册的服务名
+      service-name: demo-service
+  grpc:
+    register:
+      # 是否启用注册中心，默认关闭
+      enable: true
+      # 目前注册中心为nats；nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+      url: nats://127.0.0.1:4222
+      # 认证方式：用户名和密码
+      userName: admin
+      # 认证方式：密码，这个密码一定要用明文（服务端加密的话，代码中要用明文）
+      password: admin-demo123@xxxx.com

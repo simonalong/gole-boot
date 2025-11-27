@@ -1,0 +1,113 @@
+gole:
+  nats:
+    enable: true
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+    url: nats://127.0.0.1:4222
+    # 客户端名字
+    name: xx-demo-service
+    # 认证方式：用户名和密码
+    username: admin
+    # 认证方式：密码，这个密码一定要用明文（服务端加密的话，代码中要用明文）
+    password: admin-demo123@xxxx.com
+    # nats-js的配置
+    jetstream:
+      # 是否使用jetstream
+      enable: true
+      # 流配置
+      streams:
+        - name: stream-name1
+          description: 描述1
+          # Subjects 是流正在监听的主题列表。支持通配符。如果流是作为镜像创建的，则无法设置主题。
+          subjects:
+            - test1.*.req
+            - test2.*.req
+          #--------------- 流的消息限制和留存策略 ---------------
+          # MaxConsumers指定流允许的最大消费者数量。
+          max-consumers: 1000
+          #	MaxMsgs是流将存储的最大消息数。
+          #	达到限制后，流将遵守丢弃策略。
+          #	如果未设置，服务器默认值为-1（无限制）。
+          max-msgs: 1000
+          #	MaxBytes是流将存储的消息的最大总大小。
+          #	达到限制后，流将遵守丢弃策略。
+          #	如果未设置，服务器默认值为-1（无限制）。
+          max-bytes: 1000
+          #	MaxAge是流将保留的消息的最大年龄。
+          max-age: 3h
+          #	MaxMsgsPerSubject 是流将保留的每个主题的最大消息数。
+          max-msgs-per-subject: 1000
+          # MaxMsgSize 是流中任何单个消息的最大大小。
+          max-msg-size: 1000
+          # Retention 定义了流的消息保留策略。默认为LimitsPolicy。目前支持三种：0-Limits, 1-Interest, 2-WorkQueue
+          retention: 2
+          #	Discard 定义了当流在消息数量或总字节数方面达到限制时的消息处理策略；0-DiscardOld；1-DiscardNew；默认0
+          discard: 1
+          #	DiscardNewPerSubject 是一个标志，用于在达到限制时丢弃每个主题的新消息。要求DiscardPolicy设置为DiscardNew，并设置MaxMsgsPerSubject。
+          discard-new-per-subject: true
+          # Storage指定用于流的存储后端的类型。0-FileStorage；1-MemoryStorage
+          storage: 1
+
+          #--------------- 集群配置 ---------------
+          # Replicas是集群JetStream中的流副本数量。
+          # 默认值为1，最大值为5。
+          replicas: 3
+          #	放置用于通过标签和/或显式集群名称声明流应放置在何处
+          placement:
+            cluster: cluster-name
+            tags:
+              - "tag1"
+
+          #--------------- 来源配置 ---------------
+          # Mirror定义了镜像另一个流的配置。
+          mirror:
+            name: mirror-name
+
+          # Source是此流消息来源的其他流的列表。
+          sources:
+            - name: source0-name
+
+          #--------------- 操作配置 ---------------
+          # 密封流不允许通过限制或API发布或删除消息，
+          # 密封的流不能通过配置更新解除密封。只能通过更新API对已创建的流进行设置。
+          sealed: true
+          # DenyDelete限制通过API从流中删除消息的能力。默认为false。
+          deny-delete: true
+          # DenyPurge限制了通过API从流中清除消息的能力。默认为false。
+          deny-purge: true
+          #	AllowRollup允许使用Nats Rollup标头用单个新消息替换流的所有内容或流中的主题。
+          allow-rollup: true
+
+          # --------------- 内容控制 ---------------
+          # Duplicates是跟踪重复消息的窗口。如果未设置，服务器默认值为2分钟。
+          duplicates: 3m
+          # Compression指定消息存储压缩算法。默认设置为“无压缩”。
+          compression: 1
+          #	FirstSeq是流中第一条消息的初始序列号。
+          first-seq: 1
+          #	SubjectTransform允许对匹配的消息主题应用转换。
+          subject-transform:
+            source: source
+            destination: destination
+          #	重新发布允许在消息存储后立即将其重新发布到配置的主题。
+          re-publish:
+            source: source
+            destination: destination
+            headers-only: true
+          # AllowDirect允许使用直接获取API直接访问单个消息。默认为false。
+          allow-direct: true
+          # MirrorDirect允许使用直接获取API直接访问原始流中的单个消息。默认为false。
+          mirror-direct: true
+
+          # --------------- 消费配置 ---------------
+          # NoAck是一个标志，用于禁用此流接收到的确认消息。如果设置为true，JetStream客户端的发布方法将无法按预期工作，因为它们依赖于确认。应改用核心NATS发布方法。请注意，这将降低消息传递的可靠性。
+          no-ack: true
+          #	ConsumerLimits定义了消费者可以设置的某些值的限制，默认值适用于未设置这些设置的人
+          consumer-limits:
+            inactive-threshold: 3s
+            max-ack-pending: 12
+
+          # --------------- 其他配置 ---------------
+          # 元数据是一组应用程序定义的键值对，用于关联流上的元数据。此功能需要nats服务器v2.10.0或更高版本。
+          metadata:
+            key1: value1
+            key2: value2

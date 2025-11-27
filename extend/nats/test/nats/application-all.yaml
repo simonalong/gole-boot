@@ -1,0 +1,73 @@
+gole:
+  nats:
+    enable: true
+    # --------------- 基本信息 ---------------
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+    url: nats://127.0.0.1:4222
+    # 客户端名字
+    name: xx-demo-service
+    # --------------- 连接认证 ---------------
+    # 认证方式：用户名和密码
+    username: admin
+    # 认证方式：密码，这个密码一定要用明文（服务端加密的话，代码中要用明文）
+    password: admin-demo123@xxxx.com
+    # 认证方式：token
+    token: xxxxxxxxxxxxxxx
+    # 认证方式：NKey；种子文件地址
+    nk-seed-file: ./nkeys/seed.txt
+
+    #--------------- 连接配置 ---------------
+    # 允许在遇到与当前服务器的断开连接时使用重新连接逻辑。
+    allow-reconnect: true
+    # 最大重连次数。如果是否定的，那么它永远不会放弃尝试重新连接。默认为60。
+    max-reconnect: 100
+    # ReconnectWait 重连后等待时间。默认为2s
+    reconnect-wait: 12s
+    # ReconnectJitter 设置在未使用TLS的重新连接期间添加到ReconnectWait的随机延迟的上限。默认为100ms。
+    reconnect-jitter: 100ms
+    # ReconnectJitterTLS 设置使用TLS时在重新连接期间添加到ReconnectWait的随机延迟的上限。默认为1秒。如下两个配置都可以
+    reconnect-jitter-tLS: 1s
+    #  Timeout 设置连接上拨号操作的超时时间。默认为2s。
+    timeout: 2s
+    # DrainTimeout 设置数据流排完的超时时间。默认为30秒。
+    drain-timeout: 30s
+    #  FlusherTimeout 是等待底层连接的写入操作完成（包括刷新循环）的最长时间。默认为1分钟
+    flusher-timeout: 1m
+    # PingInterval是客户端向服务器发送ping命令的时间段，如果为0或负数，则禁用。默认为2分钟
+    ping-interval: 2m
+    # MaxPingsOut是在引发ErrStaleConnection错误之前可以等待响应的挂起ping命令的最大数量。默认为2。
+    max-pings-out: 2
+    #  ReconnectBufSize 是重新连接期间支持bufio的大小。一旦完成此操作，发布操作将返回错误。默认值为8388608字节（8MB）。
+    reconnect-buf-size: 8388608
+    # SubChanLen是套接字Go例程和SyncSubscriptions的消息传递之间使用的缓冲通道的大小。注意：这不会影响由PendingLimits（）指定的AsyncSubscriptions。默认值为65536。
+    sub-chan-len: 65536
+    #  如果无法连接到初始设置中的服务器，RetryOnFailedConnect会立即将连接设置为重新连接状态。
+    #  MaxReconnect和ReconnectWait选项用于此过程，类似于断开已建立的连接。如果设置了ReconnectHandler，
+    #  则它将在第一次成功的重新连接尝试时被调用（如果初始连接失败），如果设置了ClosedHandler，则在连接失败时（在用尽MaxReconnect尝试后）将被调用。
+    retry-on-failed-connect: false
+
+    #--------------- websocket 配置 ---------------
+    # 对于websocket连接，向服务器指示该连接支持压缩。如果服务器也这样做，那么数据将被压缩。
+    compression: false
+    # 对于websocket连接，向连接url添加一个路径。当连接到代理后面的NATS时，这很有用。
+    proxy-path: ws://xxx/xxx/xx
+
+    #--------------- 其他配置 ---------------
+    # NoRandomize 配置我们是否对服务器池进行随机化
+    no-randomize: false
+    # NoEcho 配置如果我们也有匹配的订阅，服务器是否会回显在此连接上发送的消息。请注意，version >= 1.2
+    no-echo: false
+    #  详细指示服务器为服务器成功处理的命令发送OK确认
+    verbose: false
+    #  Pedantic向服务器发出信号，表示是否应该对受试者进行进一步验证
+    pedantic: false
+    #  UseOldRequestStyle 强制使用旧的请求方法，即为每个请求使用新的收件箱和新的订阅。
+    use-old-request-style: false
+    #  NoCallbacksAfterClientClose 允许在调用Close（）后阻止调用回调。当用户代码调用Close时，客户端将不会收到通知。默认情况下是调用回调。
+    no-callbacks-after-client-close: false
+    #  InboxPrefix允许自定义默认的_INBOX前缀
+    inbox-prefix: _api_demo
+    #  IgnoreAuthErrorAbort-如果设置为true，则客户端将退出默认连接行为，即如果服务器两次返回相同的身份验证错误，则中止后续的重新连接尝试（无论重新连接策略如何）。
+    ignore-auth-error-abort: false
+    #  SkipHostLookup跳过服务器主机名的DNS查找。
+    skip-host-lookup: false

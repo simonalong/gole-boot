@@ -1,0 +1,27 @@
+gole:
+  server:
+    http:
+      api:
+        prefix: /api/demo
+      multi: # 这个表示多个服务端配置
+        server-name1: # 这个服务端1的名字
+          enable: true
+          port: 8081
+          api: # 对应服务的api前缀，不写，则默认使用gole.server.http.api.prefix
+            prefix: /api/name1
+        server-name2: # 这个服务端2的名字
+          enable: true
+          port: 8082
+          api: # 对应服务的api前缀，不写，则默认使用gole.server.http.api.prefix
+            prefix: /api/name2
+        server-name3: # 这个服务端3的名字
+          enable: true
+          port: 8083
+          api: # 对应服务的api前缀，不写，则默认使用gole.server.http.api.prefix
+            prefix: /api/name3
+
+  logger:
+    level: debug
+    color:
+      # 启用：true/false，默认：true
+      enable: true

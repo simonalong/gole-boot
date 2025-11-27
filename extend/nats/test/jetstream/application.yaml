@@ -1,0 +1,16 @@
+gole:
+  application:
+    name: xx-demo-service
+  nats:
+    enable: true
+    # nats的url，可以为一个，集群情况下，可以填写多个（多个之间英文逗号区分）；也可以不填，默认：nats://127.0.0.1:4222
+#    url: nats://${CLOUD_HOST}:4222
+    # 客户端名字，可以不填，默认为 gole.application.name
+    name: xx-demo-service
+    url: nats://192.168.1.83:31011
+    user-name: admin
+    password: admin@1234
+    # nats-js的配置
+    jetstream:
+      # 是否使用jetstream
+      enable: true

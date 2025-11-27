@@ -1,0 +1,5 @@
+gole:
+  redis:
+    enable: true
+    standalone:
+      addr: localhost:6379

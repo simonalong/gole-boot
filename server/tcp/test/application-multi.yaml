@@ -1,0 +1,16 @@
+gole:
+  application:
+    name: sample
+  server:
+    # http 服务
+    http:
+      enable: true
+      port: 8180
+    # tcp 服务
+    tcp:
+      enable: true
+      port: 9000
+    # grpc 服务
+    grpc:
+      enable: true
+      port: 9090

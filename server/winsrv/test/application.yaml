@@ -1,0 +1,6 @@
+gole:
+  win-server:
+    enable: true
+    name: test_name
+    display-name: test
+    description: 这是一个测试程序
