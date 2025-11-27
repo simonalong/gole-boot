@@ -78,7 +78,7 @@ func parameterFix() {
 	}
 
 	if cfg.ExecutorName == "" {
-		if val := config.BaseCfg.Application.Name; val != "" {
+		if val := config.GoleCfg.Application.Name; val != "" {
 			cfg.ExecutorName = val
 		} else {
 			logger.Fatalf("gole.application.name 不可为空")

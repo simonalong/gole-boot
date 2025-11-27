@@ -84,7 +84,7 @@ func NewClient() (goredis.UniversalClient, error) {
 
 	if config.GetValueBoolDefault("gole.meter.redis.enable", false) {
 		var applicationName string
-		if val := config.BaseCfg.Application.Name; val != "" {
+		if val := config.GoleCfg.Application.Name; val != "" {
 			applicationName = val
 		} else {
 			logger.Fatalf("gole.application.name 不可为空")

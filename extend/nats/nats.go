@@ -216,7 +216,7 @@ func GetNameOption() nats.Option {
 	// 添加name
 	natsName := CfgOfNats.Name
 	if CfgOfNats.Name == "" {
-		if val := config.BaseCfg.Application.Name; val != "" {
+		if val := config.GoleCfg.Application.Name; val != "" {
 			natsName = val
 		} else {
 			logger.Fatalf("gole.application.name 不可为空")

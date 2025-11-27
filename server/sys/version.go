@@ -2,8 +2,9 @@ package sys
 
 import (
 	"fmt"
-	"github.com/simonalong/gole/config"
 	"sync"
+
+	"github.com/simonalong/gole/config"
 )
 
 var BootVersion = "v1.6.2"
@@ -28,11 +29,11 @@ func PrintBanner() {
 	}
 	fmt.Printf("---------------------------------------- cbb-gole-boot: %s ----------------------------------------\n", BootVersion)
 	fmt.Printf("profile：%s\n", config.CurrentProfile)
-	appName := config.BaseCfg.Application.Name
+	appName := config.GoleCfg.Application.Name
 	if appName != "" {
-		fmt.Printf("服务名：%v\n", config.BaseCfg.Application.Name)
+		fmt.Printf("服务名：%v\n", config.GoleCfg.Application.Name)
 	}
-	appVersion := config.BaseCfg.Application.Version
+	appVersion := config.GoleCfg.Application.Version
 	if appVersion != "" {
 		fmt.Printf("版本号：%v\n", appVersion)
 	}

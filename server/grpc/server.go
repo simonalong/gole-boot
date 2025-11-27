@@ -169,7 +169,7 @@ func getSingleGrpcServiceName() string {
 	if newServiceName != "" {
 		return newServiceName
 	}
-	if val := config.BaseCfg.Application.Name; val != "" {
+	if val := config.GoleCfg.Application.Name; val != "" {
 		return val
 	} else {
 		logger.Fatalf("gole.application.name 不可为空")
