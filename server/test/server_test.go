@@ -3,6 +3,8 @@ package test
 import (
 	"context"
 	"fmt"
+	"testing"
+
 	"github.com/gin-gonic/gin"
 	"github.com/panjf2000/gnet/v2"
 	"github.com/simonalong/gole-boot/server"
@@ -12,7 +14,6 @@ import (
 	"github.com/simonalong/gole-boot/server/http/rsp"
 	"github.com/simonalong/gole-boot/server/tcp"
 	"github.com/simonalong/gole/logger"
-	"testing"
 )
 
 type ServerImpl struct {
@@ -31,7 +32,7 @@ func TestServerGrpcAndHttp(t *testing.T) {
 	// 注册服务
 	baseGrpc.Register(&service2.Greeter_ServiceDesc, &ServerImpl{})
 	// 启动http服务
-	httpServer.AddGinRoute("/api/data", httpServer.HmGet, func(c *gin.Context) {
+	httpServer.AddRouteGinHandler("/api/data", httpServer.HmGet, func(c *gin.Context) {
 		rsp.Done(c, "ok")
 	})
 
@@ -65,7 +66,7 @@ func TestServer(t *testing.T) {
 	baseGrpc.Register(&service2.Greeter_ServiceDesc, &ServerImpl{})
 
 	// http：启动http服务
-	httpServer.AddGinRoute("/api/data", httpServer.HmGet, func(c *gin.Context) {
+	httpServer.AddRouteGinHandler("/api/data", httpServer.HmGet, func(c *gin.Context) {
 		rsp.Done(c, "ok")
 	})
 
