@@ -87,6 +87,10 @@ func ResponseHandler() gin.HandlerFunc {
 		statusCode := c.Writer.Status()
 		// 1xx和2xx都是成功
 		if (statusCode >= 300) && statusCode != 0 {
+			if statusCode == 401 {
+				// token失败重新登录的这个就不打印了，太多了
+				return
+			}
 			// 失败必打印
 			var response ResponseBase
 			if err := json.Unmarshal([]byte(blw.body.String()), &response); err != nil {
