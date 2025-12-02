@@ -7,7 +7,7 @@ import (
 	"github.com/simonalong/gole/config"
 )
 
-var BootVersion = "v1.0.0"
+var BootVersion = "v1.0.2"
 
 var loadLock sync.Mutex
 var Loaded = false
