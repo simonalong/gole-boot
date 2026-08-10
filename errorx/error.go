@@ -59,3 +59,8 @@ func (e *BaseError) WithDetail(detail string) *BaseError {
 	e.Detail = detail
 	return e
 }
+
+func (e *BaseError) WithDetailFormat(format string, a ...any) *BaseError {
+	e.Detail = fmt.Sprintf(format, a)
+	return e
+}
