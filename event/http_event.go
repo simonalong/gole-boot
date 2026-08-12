@@ -14,9 +14,9 @@ type ServerHttpRunStartEvent struct {
 }
 
 // ServerHttpRunFinishEvent http服务完成启动事件, 对应：event_of_server_http_run_finish
-//type ServerHttpRunFinishEvent struct {
-//	ServiceName string
-//}
+type ServerHttpRunFinishEvent struct {
+	ServiceName string
+}
 
 // ServerHttpStopEvent http服务关闭事件, 对应：event_of_server_http_stop
 type ServerHttpStopEvent struct {
@@ -39,17 +39,17 @@ func (e ServerHttpRunStartEvent) ToString() string {
 	return ""
 }
 
-//func (e ServerHttpRunFinishEvent) Name() string {
-//	return EventOfServerHttpRunFinish
-//}
-//
-//func (e ServerHttpRunFinishEvent) Group() string {
-//	return e.ServiceName
-//}
-//
-//func (e ServerHttpRunFinishEvent) ToString() string {
-//	return ""
-//}
+func (e ServerHttpRunFinishEvent) Name() string {
+	return EventOfServerHttpRunFinish
+}
+
+func (e ServerHttpRunFinishEvent) Group() string {
+	return e.ServiceName
+}
+
+func (e ServerHttpRunFinishEvent) ToString() string {
+	return ""
+}
 
 func (e ServerHttpStopEvent) Name() string {
 	return EventOfServerHttpStop

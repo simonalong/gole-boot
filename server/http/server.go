@@ -328,6 +328,7 @@ func graceRun(serviceName string, port int) {
 		}
 	}()
 
+	listener.PublishEvent(event.ServerHttpRunFinishEvent{ServiceName: serviceName})
 	listener.PublishEvent(event.ServerHttpAllRunFinishEvent{})
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGHUP, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
