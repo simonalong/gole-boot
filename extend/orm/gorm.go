@@ -368,10 +368,10 @@ func (l *GormLoggerAdapter) Trace(ctx context.Context, begin time.Time, fc func(
 	sqlStr, rowsAffected := fc()
 	if err != nil {
 		if err.Error() != "record not found" {
-			baseLogger.Group("orm").Warnf("[SQL][%v]%s; 异常: %v", durationMs(elapsed), sqlStr, err.Error())
+			baseLogger.Group("orm").Warnf("[SQL][%.2fms]%s; 异常: %v", durationMs(elapsed), sqlStr, err.Error())
 		}
 	} else {
-		baseLogger.Group("orm").Debugf("[SQL][%v][row:%v]%s", durationMs(elapsed), rowsAffected, sqlStr)
+		baseLogger.Group("orm").Debugf("[SQL][%.2fms][row:%v]%s", durationMs(elapsed), rowsAffected, sqlStr)
 	}
 }
 
